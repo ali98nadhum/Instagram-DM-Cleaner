@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "types": ["node"],
+    "strict": true,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "newLine": "lf"
+  },
+  "include": ["scripts/build-userscript.ts"]
+}

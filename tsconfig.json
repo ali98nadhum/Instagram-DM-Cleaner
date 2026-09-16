@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["ES2019", "DOM"],
+    "module": "commonjs",
+    "strict": true,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "newLine": "lf",
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/content.ts"]
+}
