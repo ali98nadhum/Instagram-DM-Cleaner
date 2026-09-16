@@ -91,6 +91,8 @@
   }
 
   interface PanelElements {
+    panelEl: HTMLElement;
+    trigger: HTMLButtonElement;
     body: HTMLElement;
     close: HTMLButtonElement;
     statusDot: HTMLElement;
@@ -405,9 +407,11 @@
       #imc-panel { position: fixed; top: 70px; right: 20px; width: 300px; background: #fff; border: 1px solid #dbdbdb; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999999; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 13px; color: #262626; }
       #imc-panel * { box-sizing: border-box; }
       #imc-header { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #efefef; font-weight:600; cursor:move; user-select:none; }
-      #imc-close { cursor:pointer; border:none; background:none; font-size:16px; color:#8e8e8e; }
+      #imc-close { cursor:pointer; border:none; background:none; font-size:18px; line-height:1; color:#8e8e8e; padding:0 2px; }
+      #imc-close:hover { color:#262626; }
       #imc-body { padding:12px; }
-      #imc-body.imc-collapsed { display:none; }
+      #imc-trigger { position: fixed; top: 70px; right: 20px; z-index: 999999; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #dbdbdb; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); cursor: pointer; font-size: 20px; display: none; align-items: center; justify-content: center; padding: 0; }
+      #imc-trigger:hover { background: #fafafa; }
       .imc-row { margin-bottom:8px; }
       .imc-label { color:#8e8e8e; }
       .imc-status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px; }
@@ -438,7 +442,7 @@
     panel.innerHTML = `
       <div id="imc-header">
         <span>Instagram Message Cleaner</span>
-        <button id="imc-close" title="Minimize">—</button>
+        <button id="imc-close" title="Close">×</button>
       </div>
       <div id="imc-body">
         <div class="imc-row"><span class="imc-status-dot imc-dot-bad" id="imc-status-dot"></span><span id="imc-status-text">Not connected</span></div>
@@ -459,7 +463,15 @@
     `;
     document.body.appendChild(panel);
 
+    const trigger = document.createElement('button');
+    trigger.id = 'imc-trigger';
+    trigger.title = 'Open Instagram Message Cleaner';
+    trigger.textContent = '🧹';
+    document.body.appendChild(trigger);
+
     els = {
+      panelEl: panel,
+      trigger,
       body: panel.querySelector('#imc-body') as HTMLElement,
       close: panel.querySelector('#imc-close') as HTMLButtonElement,
       statusDot: panel.querySelector('#imc-status-dot') as HTMLElement,
@@ -479,7 +491,14 @@
       log: panel.querySelector('#imc-log') as HTMLElement,
     };
 
-    els.close.addEventListener('click', () => els.body.classList.toggle('imc-collapsed'));
+    els.close.addEventListener('click', () => {
+      els.panelEl.style.display = 'none';
+      els.trigger.style.display = 'flex';
+    });
+    els.trigger.addEventListener('click', () => {
+      els.panelEl.style.display = 'block';
+      els.trigger.style.display = 'none';
+    });
     els.btnScan.addEventListener('click', onScanClick);
     els.btnUnsend.addEventListener('click', onUnsendClick);
     els.btnStop.addEventListener('click', onStopClick);

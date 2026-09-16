@@ -13,7 +13,7 @@ if (!fs.existsSync(srcPath)) {
 const header = `// ==UserScript==
 // @name         Instagram Message Cleaner
 // @namespace    instagram-message-cleaner.local
-// @version      1.0.0
+// @version      1.0.1
 // @description  Bulk-unsend your own messages from an Instagram DM conversation. Runs fully in your browser, uses your existing Instagram session, never touches your password or sends data anywhere else.
 // @author       you
 // @match        https://www.instagram.com/direct/*
