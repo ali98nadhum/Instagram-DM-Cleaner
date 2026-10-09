@@ -201,7 +201,7 @@ instade/
 
 ## Contributing
 
-Issues and pull requests are welcome. The whole project is one TypeScript file
+Issues and pull test requests are welcome. The whole project is one TypeScript file
 ([`src/content.ts`](src/content.ts)) plus a tiny build script — no framework, no bundler beyond
 `tsc` itself. Run `npm install && npm run build` to get set up.
 
